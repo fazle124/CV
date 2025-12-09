@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Resume - Md. Fazle Rabbi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* --- Page setup for A4 --- */
+    :root{
+      --page-width:210mm;
+      --page-height:297mm;
+      --margin:18mm;
+      --accent:#0b69ff;
+      --muted:#555;
+      --text:#111;
+      --card:#ffffff;
+      --paper-bg:#f2f4f7;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color:var(--text);
+    }
+    html,body{height:100%;background:var(--paper-bg);margin:0;padding:20px 0;}
+    .container{width:calc(var(--page-width));margin:0 auto;display:flex;flex-direction:column;gap:18px;align-items:center;}
+
+    .page{
+      width:calc(var(--page-width) - (var(--margin) * 2));
+      min-height:calc(var(--page-height) - (var(--margin) * 2));
+      background:var(--card);
+      padding:20px;
+      box-sizing:border-box;
+      box-shadow:0 6px 18px rgba(20,20,20,0.08);
+      position:relative;
+      page-break-after:always;
+    }
+
+    /* HEADER */
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      border-bottom:2px solid #e6e6e6;
+      padding-bottom:12px;
+    }
+    .left{
+      max-width:72%;
+    }
+    .title{
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:0.4px;
+      margin:0 0 6px 0;
+    }
+    .subline{font-size:13px;color:var(--muted);margin:0 0 10px 0}
+    .contact-list{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted);}
+    .contact-item{display:flex;gap:8px;align-items:center;}
+    .contact-item strong{color:var(--text);min-width:120px;display:inline-block;font-weight:600;font-size:13px}
+
+    .photo{
+      width:120px;height:150px;border-radius:6px;overflow:hidden;border:1px solid #ddd;
+      background:#fff;display:flex;align-items:center;justify-content:center;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Sections */
+    .section{margin-top:14px}
+    .section h2{font-size:16px;margin:0 0 8px 0;font-weight:800;border-bottom:1px solid #ddd;padding-bottom:6px}
+    .section p{margin:6px 0;color:var(--muted);line-height:1.55}
+
+    .job{margin-top:8px}
+    .job .comp{font-weight:700;color:var(--text);font-size:14px}
+    .job .meta{font-size:13px;color:var(--muted);margin-top:2px}
+    .job ul{margin:8px 0 0 18px;color:var(--muted)}
+
+    /* Education New Clean Style */
+    .edu-card{
+      background:#fbfbfc;
+      border-left:4px solid var(--accent);
+      padding:10px 12px;
+      border-radius:4px;
+      margin-bottom:10px;
+      box-shadow:0 2px 6px rgba(12,12,12,0.03)
+    }
+    .edu-card strong{
+      font-size:15px;
+      color:var(--text);
+      display:block;
+    }
+    .edu-line{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    /* Computer Skill bullets */
+    .skill-list{
+      margin-top:8px;
+      padding-left:18px;
+    }
+    .skill-list li{
+      font-size:14px;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+
+    /* Personal info table */
+    .info-table{font-size:13px;color:var(--muted);line-height:1.6}
+    .info-row{display:flex;gap:8px;margin:3px 0}
+    .info-row .label{min-width:160px;font-weight:700;color:var(--text);font-size:13px}
+
+    .signature{width:160px;margin-top:10px}
+
+    .footer-note{position:absolute;right:20px;bottom:14px;font-size:12px;color:var(--muted)}
+
+    /* Print */
+    @media print{
+      body{background:white;padding:0}
+      .page{box-shadow:none;page-break-after:always}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- PAGE 1 -->
+    <section class="page">
+      <!-- Header -->
+      <div class="header">
+        <div class="left">
+          <h1 class="title">Resume of<br><span style="font-weight:900">MD. Fazle Rabbi</span></h1>
+          <p class="subline">Mailing Address: <strong>Bason, Gazipur, Dhaka</strong></p>
+
+          <div class="contact-list">
+            <div class="contact-item"><strong>Contact :</strong> <span>01610842781</span></div>
+            <div class="contact-item"><strong>E-mail :</strong> <span>fazlerabbi66122@gmail.com</span></div>
+            <div class="contact-item"><strong>LinkedIn :</strong> <span>www.linkedin.com/in/fazle124</span></div>
+          </div>
+        </div>
+
+        <div class="photo"><img src="Profile.png" alt=""></div>
+      </div>
+
+      <!-- Career Objective -->
+      <div class="section">
+        <h2>CAREER OBJECTIVE</h2>
+        <p>
+          Dedicated and detail-oriented quality professional with experience in QC, QI, and quality reporting in the garment industry.
+          Committed to ensuring high production standards, reducing defects, and improving workflow efficiency.
+        </p>
+      </div>
+
+      <!-- JOB EXPERIENCE -->
+      <div class="section">
+        <h2>JOB EXPERIENCE</h2>
+
+        <div class="job">
+          <div class="comp">Colossus Apparel Limited</div>
+          <div class="meta"><strong>Designation :</strong> Quality Reporter</div>
+          <div class="meta"><strong>Experience :</strong> 3 Years</div>
+
+          <div style="margin-top:8px;font-weight:700;color:var(--text)">Key Responsibilities:</div>
+          <ul>
+            <li>Prepare daily quality reports for production lines</li>
+            <li>Monitor defects, trends & root causes</li>
+            <li>Maintain compliance with buyer quality standards</li>
+            <li>Ensure defect-free output through QC & QI team coordination</li>
+            <li>Communicate with supervisors for corrective actions</li>
+          </ul>
+        </div>
+
+        <div class="job" style="margin-top:14px">
+          <div class="comp">Pacific Quality Control Centre Limited (PQC)</div>
+          <div class="meta"><strong>Designation :</strong> Quality Controller (QC)</div>
+          <div class="meta"><strong>Experience :</strong> 1 Years</div>
+
+          <div style="margin-top:8px;font-weight:700;color:var(--text)">Key Responsibilities:</div>
+          <ul>
+            <li>Conduct quality inspections according to SOP</li>
+            <li>Identify defects and suggest corrective actions</li>
+            <li>Monitor quality consistency</li>
+            <li>Prepare analysis reports</li>
+            <li>Team-based quality improvement coordination</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-note">Page 1 of 2</div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page">
+
+      <!-- EDUCATIONAL QUALIFICATION -->
+      <div class="section">
+        <h2>EDUCATIONAL QUALIFICATION</h2>
+
+        <div class="edu-card">
+          <strong>Secondary School Certificate (SSC)</strong>
+          <div class="edu-line">Institute : Sananda Bari School</div>
+          <div class="edu-line">Group : Science</div>
+          <div class="edu-line">Result : 3.56</div>
+          <div class="edu-line">Board : Dhaka</div>
+        </div>
+
+        <div class="edu-card">
+          <strong>Higher Secondary Certificate (HSC)</strong>
+          <div class="edu-line">Institute : Sananda Bari College</div>
+          <div class="edu-line">Group : Science</div>
+          <div class="edu-line">Result : 3.67</div>
+          <div class="edu-line">Passing Year : 2020</div>
+          <div class="edu-line">Board : Dhaka</div>
+        </div>
+
+        <div class="edu-card">
+          <strong>Bachelor of Science (BSc)</strong>
+          <div class="edu-line">Institute : Gov. Abdul Khalek Memorial College</div>
+          <div class="edu-line">Group : Science</div>
+          <div class="edu-line">Result : Pending</div>
+        </div>
+      </div>
+
+      <!-- COMPUTER SKILLS -->
+      <div class="section">
+        <h2>COMPUTER SKILLS</h2>
+        <ul class="skill-list">
+          <li>Sunrise Software (Hanger Line System)</li>
+          <li>Microsoft Excel, Word & PowerPoint</li>
+          <li>ERP System Knowledge</li>
+          <li>Basic Data Analysis & Reporting</li>
+        </ul>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="section">
+        <h2>LANGUAGES</h2>
+        <p>Bangla <br> English <br> Chinese (Basic)</p>
+      </div>
+
+      <!-- PERSONAL INFORMATION -->
+      <div class="section">
+        <h2>PERSONAL INFORMATION</h2>
+
+        <div class="info-table">
+          <div class="info-row"><div class="label">Name :</div> <div>Md Fazle Rabbi</div></div>
+          <div class="info-row"><div class="label">Father’s Name :</div> <div>Md. Badsha Mondol</div></div>
+          <div class="info-row"><div class="label">Mother’s Name :</div> <div>Mst. Nazma Begum</div></div>
+          <div class="info-row"><div class="label">Date of Birth :</div> <div>23 October 2002</div></div>
+          <div class="info-row"><div class="label">Gender :</div> <div>Male</div></div>
+          <div class="info-row"><div class="label">Marital Status :</div> <div>Unmarried</div></div>
+          <div class="info-row"><div class="label">Religion :</div> <div>Islam (Sunni)</div></div>
+          <div class="info-row"><div class="label">Permanent Address :</div> <div>Village: Uttor Mokichar, PO: Sanandabari, UP: Dewanganj, Jamalpur</div></div>
+        </div>
+      </div>
+
+      <!-- DECLARATION -->
+      <div class="section">
+        <h2>DECLARATION</h2>
+        <p>
+          I hereby declare that the information provided is true and correct to the best of my knowledge and belief.
+        </p>
+
+        <p><strong>Date:</strong> <span id="autoDate">--</span></p>
+
+        <img src="signature.jpg" class="signature">
+        <div style="font-weight:700;margin-top:6px">Signature</div>
+      </div>
+
+      <div class="footer-note">Page 2 of 2</div>
+    </section>
+
+  </div>
+
+  <script>
+    document.getElementById("autoDate").textContent =
+      new Date().toLocaleDateString("en-GB");
+  </script>
+
+</body>
+</html>
