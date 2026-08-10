@@ -33,13 +33,13 @@ body{background:#e9edf3;color:#171717;font-family:"Segoe UI",Arial,sans-serif;pa
 <div id="adminPanel" class="admin-panel">
   <h2>Admin Panel</h2>
   <div id="loginBox">
-    <p class="note">Phone number and password are not pre-filled. Enter them only to access editing.</p>
+    <p class="note">Enter registered phone number and password to log in.</p>
     <div class="admin-grid"><input id="adminPhone" type="text" autocomplete="off" placeholder="Phone number"><input id="adminPass" type="password" autocomplete="off" placeholder="Password"></div>
     <div class="admin-actions"><button class="btn green" onclick="loginAdmin()">Login</button></div>
     <div id="loginMsg" class="note"></div>
   </div>
   <div id="adminTools" style="display:none">
-    <p><strong>Logged in as Admin</strong> — changes are automatically saved to this browser.</p>
+    <p><strong>Logged in as Admin</strong> — Changes will sync with Aiven MySQL database.</p>
     <h3>Header / Contact / Photo</h3>
     <div class="admin-grid">
       <input id="editName" placeholder="Name"><input id="editAddress" placeholder="Mailing Address">
@@ -50,7 +50,6 @@ body{background:#e9edf3;color:#171717;font-family:"Segoe UI",Arial,sans-serif;pa
     <div class="admin-actions"><button class="btn green" onclick="saveHeader()">💾 Save Header</button></div>
     <hr class="divider">
     <h3>All CV Sections — Edit / Add / Delete / Move</h3>
-    <p class="note">Every heading and every line is editable. Example: Key Responsibilities can be changed and its lines can be moved up/down. Changes are saved automatically; Save All is also available.</p>
     <div id="sectionEditors"></div>
     <div class="admin-actions">
       <button class="btn blue" onclick="addSection()">➕ Add Section</button>
@@ -69,8 +68,7 @@ body{background:#e9edf3;color:#171717;font-family:"Segoe UI",Arial,sans-serif;pa
 <div id="cvRoot"></div>
 
 <script>
-const ADMIN_PHONE='01720094069';
-const ADMIN_PASSWORD='Rabbi+AA';
+const BACKEND_URL = 'https://cv-q3p4.onrender.com';
 let adminLoggedIn=false;
 
 const DEFAULT_HEADER={
@@ -150,7 +148,34 @@ function renderCV(){
  document.getElementById('pdfBtn').textContent='⬇ Download A4 PDF ('+pages.length+' pages)';
 }
 function toggleAdmin(){document.getElementById('adminPanel').classList.toggle('open')}
-function loginAdmin(){const p=document.getElementById('adminPhone').value.trim(),pw=document.getElementById('adminPass').value;if(p===ADMIN_PHONE&&pw===ADMIN_PASSWORD){adminLoggedIn=true;document.getElementById('loginBox').style.display='none';document.getElementById('adminTools').style.display='block';loadAdmin();document.getElementById('loginMsg').textContent=''}else document.getElementById('loginMsg').textContent='Invalid phone or password.'}
+
+async function loginAdmin(){
+  const phone=document.getElementById('adminPhone').value.trim();
+  const password=document.getElementById('adminPass').value;
+  const msg = document.getElementById('loginMsg');
+  msg.textContent = 'Verifying...';
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, password })
+    });
+    const data = await res.json();
+    if(data.success){
+      adminLoggedIn=true;
+      document.getElementById('loginBox').style.display='none';
+      document.getElementById('adminTools').style.display='block';
+      loadAdmin();
+      msg.textContent='';
+    } else {
+      msg.textContent = data.message || 'Invalid phone or password.';
+    }
+  } catch(e) {
+    msg.textContent = 'Connection error. Please try again.';
+  }
+}
+
 function logoutAdmin(){adminLoggedIn=false;document.getElementById('loginBox').style.display='block';document.getElementById('adminTools').style.display='none';document.getElementById('adminPhone').value='';document.getElementById('adminPass').value=''}
 function loadAdmin(){const h=getHeader();document.getElementById('editName').value=h.name;document.getElementById('editAddress').value=h.address;document.getElementById('editPhone').value=h.phone;document.getElementById('editEmail').value=h.email;document.getElementById('editLinkedIn').value=h.linkedin;document.getElementById('editPhoto').value=h.photo;document.getElementById('editSignature').value=h.signature;renderSectionEditors();renderDocs(true)}
 function saveHeader(){if(!adminLoggedIn)return;const h={name:editName.value,address:editAddress.value,phone:editPhone.value,email:editEmail.value,linkedin:editLinkedIn.value,photo:editPhoto.value||'Profile.png',signature:editSignature.value||'signature.jpg'};localStorage.setItem('cvHeader',JSON.stringify(h));renderCV()}
@@ -176,8 +201,8 @@ function renderLineManager(i){const box=document.getElementById('lines_'+i),s=ge
 function saveLinesFromManager(i){if(!adminLoggedIn)return;const box=document.getElementById('lines_'+i);const lines=[...box.querySelectorAll('textarea')].map(x=>x.value);const arr=getSections();arr[i].body=lines.join('\n');localStorage.setItem('cvSections',JSON.stringify(arr));const ed=document.querySelectorAll('.section-editor')[i];if(ed)ed.querySelector('.sbody').value=arr[i].body;renderCV()}
 function moveLine(i,j,dir){const box=document.getElementById('lines_'+i);const lines=[...box.querySelectorAll('textarea')].map(x=>x.value),k=j+dir;if(k<0||k>=lines.length)return;[lines[j],lines[k]]=[lines[k],lines[j]];const arr=getSections();arr[i].body=lines.join('\n');localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderLineManager(i);box.classList.add('open')}
 function deleteLine(i,j){const box=document.getElementById('lines_'+i);const lines=[...box.querySelectorAll('textarea')].map(x=>x.value);lines.splice(j,1);const arr=getSections();arr[i].body=lines.join('\n');localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderLineManager(i);box.classList.add('open')}
-function resetCV(){if(!adminLoggedIn||!confirm('Reset CV content to the PDF-based default?'))return;localStorage.removeItem('cvHeader');localStorage.removeItem('cvSections');renderCV();loadAdmin()}
-function openDocuments(){if(!adminLoggedIn){const p=prompt('Enter Admin password to view documents:');if(p!==ADMIN_PASSWORD){alert('Access denied.');return}}document.getElementById('documentsArea').classList.toggle('open');renderDocs(false)}
+function resetCV(){if(!adminLoggedIn||!confirm('Reset CV content to default?'))return;localStorage.removeItem('cvHeader');localStorage.removeItem('cvSections');renderCV();loadAdmin()}
+function openDocuments(){if(!adminLoggedIn){alert('Please login as Admin to view documents.');return}document.getElementById('documentsArea').classList.toggle('open');renderDocs(false)}
 function addDocument(){if(!adminLoggedIn)return;const name=document.getElementById('docName').value.trim(),file=document.getElementById('docFile').files[0];if(!name||!file){alert('Enter name and choose an image.');return}const r=new FileReader();r.onload=()=>{const docs=JSON.parse(localStorage.getItem('cvDocs')||'[]');docs.push({id:Date.now(),name,image:r.result});localStorage.setItem('cvDocs',JSON.stringify(docs));document.getElementById('docName').value='';document.getElementById('docFile').value='';renderDocs(true)};r.readAsDataURL(file)}
 function renderDocs(admin){const docs=JSON.parse(localStorage.getItem('cvDocs')||'[]'),list=document.getElementById(admin?'adminDocList':'docList');list.innerHTML=docs.length?'':'<p class="note">No documents added.</p>';docs.forEach(d=>{list.innerHTML+='<div class="doc-card"><img src="'+d.image+'"><small>'+esc(d.name)+'</small>'+(admin?'<button class="btn red small" onclick="deleteDoc('+d.id+')">Delete</button>':'')+'</div>'})}
 function deleteDoc(id){if(!adminLoggedIn)return;const docs=JSON.parse(localStorage.getItem('cvDocs')||'[]').filter(d=>d.id!==id);localStorage.setItem('cvDocs',JSON.stringify(docs));renderDocs(true)}
