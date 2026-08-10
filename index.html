@@ -1,279 +1,196 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Resume - Md. Fazle Rabbi</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    /* --- Page setup for A4 --- */
-    :root{
-      --page-width:210mm;
-      --page-height:297mm;
-      --margin:18mm;
-      --accent:#0b69ff;
-      --muted:#555;
-      --text:#111;
-      --card:#ffffff;
-      --paper-bg:#f2f4f7;
-      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color:var(--text);
-    }
-    html,body{height:100%;background:var(--paper-bg);margin:0;padding:20px 0;}
-    .container{width:calc(var(--page-width));margin:0 auto;display:flex;flex-direction:column;gap:18px;align-items:center;}
-
-    .page{
-      width:calc(var(--page-width) - (var(--margin) * 2));
-      min-height:calc(var(--page-height) - (var(--margin) * 2));
-      background:var(--card);
-      padding:20px;
-      box-sizing:border-box;
-      box-shadow:0 6px 18px rgba(20,20,20,0.08);
-      position:relative;
-      page-break-after:always;
-    }
-
-    /* HEADER */
-    .header{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      border-bottom:2px solid #e6e6e6;
-      padding-bottom:12px;
-    }
-    .left{
-      max-width:72%;
-    }
-    .title{
-      font-size:28px;
-      font-weight:800;
-      letter-spacing:0.4px;
-      margin:0 0 6px 0;
-    }
-    .subline{font-size:13px;color:var(--muted);margin:0 0 10px 0}
-    .contact-list{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted);}
-    .contact-item{display:flex;gap:8px;align-items:center;}
-    .contact-item strong{color:var(--text);min-width:120px;display:inline-block;font-weight:600;font-size:13px}
-
-    .photo{
-      width:120px;height:150px;border-radius:6px;overflow:hidden;border:1px solid #ddd;
-      background:#fff;display:flex;align-items:center;justify-content:center;
-    }
-    .photo img{width:100%;height:100%;object-fit:cover;display:block}
-
-    /* Sections */
-    .section{margin-top:14px}
-    .section h2{font-size:16px;margin:0 0 8px 0;font-weight:800;border-bottom:1px solid #ddd;padding-bottom:6px}
-    .section p{margin:6px 0;color:var(--muted);line-height:1.55}
-
-    .job{margin-top:8px}
-    .job .comp{font-weight:700;color:var(--text);font-size:14px}
-    .job .meta{font-size:13px;color:var(--muted);margin-top:2px}
-    .job ul{margin:8px 0 0 18px;color:var(--muted)}
-
-    /* Education New Clean Style */
-    .edu-card{
-      background:#fbfbfc;
-      border-left:4px solid var(--accent);
-      padding:10px 12px;
-      border-radius:4px;
-      margin-bottom:10px;
-      box-shadow:0 2px 6px rgba(12,12,12,0.03)
-    }
-    .edu-card strong{
-      font-size:15px;
-      color:var(--text);
-      display:block;
-    }
-    .edu-line{
-      font-size:13px;
-      color:var(--muted);
-      margin-top:2px;
-    }
-
-    /* Computer Skill bullets */
-    .skill-list{
-      margin-top:8px;
-      padding-left:18px;
-    }
-    .skill-list li{
-      font-size:14px;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
-
-    /* Personal info table */
-    .info-table{font-size:13px;color:var(--muted);line-height:1.6}
-    .info-row{display:flex;gap:8px;margin:3px 0}
-    .info-row .label{min-width:160px;font-weight:700;color:var(--text);font-size:13px}
-
-    .signature{width:160px;margin-top:10px}
-
-    .footer-note{position:absolute;right:20px;bottom:14px;font-size:12px;color:var(--muted)}
-
-    /* Print */
-    @media print{
-      body{background:white;padding:0}
-      .page{box-shadow:none;page-break-after:always}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Resume of Md. Fazle Rabbi</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#e9edf3;color:#171717;font-family:"Segoe UI",Arial,sans-serif;padding:20px 12px}
+#appControls{width:min(100%,1120px);margin:0 auto 14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:8px;padding:10px 16px;font-weight:800;cursor:pointer;color:#fff;background:#1f2937}.btn.blue{background:#0b69ff}.btn.green{background:#166534}.btn.red{background:#b91c1c}.btn.light{background:#eef4ff;color:#0b69ff}.btn.small{padding:6px 10px;font-size:12px}.btn:disabled{opacity:.5}
+.admin-panel,.docs-area{display:none;width:min(100%,1120px);margin:0 auto 16px;background:#fff;border-radius:14px;padding:18px;box-shadow:0 10px 28px #0001}.admin-panel.open,.docs-area.open{display:block}
+.admin-panel h2,.admin-panel h3{margin:0 0 10px}.note{font-size:13px;color:#555}.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.admin-grid input,.admin-grid textarea,.section-editor input,.section-editor textarea{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:8px;font:inherit}.admin-grid textarea{min-height:80px;resize:vertical}.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.divider{border:0;border-top:1px solid #ddd;margin:18px 0}
+.section-editor{border:1px solid #d6dce5;border-radius:10px;padding:12px;margin:10px 0;background:#f8fafc}.editor-top{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.editor-top .move{display:flex;gap:5px}.section-editor textarea{min-height:140px;margin-top:8px;resize:vertical}.section-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.line-manager{display:none;margin-top:9px}.line-manager.open{display:block}.line-row{display:grid;grid-template-columns:1fr auto;gap:6px;margin:6px 0}.line-row textarea{min-height:42px;margin:0}.line-row .line-buttons{display:flex;flex-direction:column;gap:3px}
+.doc-card{display:inline-block;width:160px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:8px;margin:6px;vertical-align:top}.doc-card img{width:100%;height:120px;object-fit:cover;border-radius:4px}.doc-card small{display:block;font-weight:700;margin:4px 0}
+/* A4 home preview */
+#cvRoot{width:210mm;margin:0 auto}.page{width:210mm;height:297mm;background:#fff;margin:0 auto 16px;padding:16mm 20mm;position:relative;overflow:hidden;box-shadow:0 8px 26px #00000012;page-break-after:always;break-after:page}.page:last-child{page-break-after:auto;break-after:auto}.page-inner{height:100%;overflow:hidden}.footer-note{position:absolute;bottom:6mm;left:0;width:100%;text-align:center;font-size:10px;color:#777}
+.cv-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:9px;margin-bottom:9px;border-bottom:2px solid #9b9b9b}.title{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.15;margin:0 0 5px;font-weight:800}.title span{font-weight:800}.subline{font-size:13px;margin:2px 0 7px}.contact-list{display:flex;flex-direction:column;gap:3px;font-size:13px}.contact-item strong{display:inline-block;min-width:72px}.photo{width:110px;height:140px;flex:none;overflow:hidden;background:#eee}.photo img{width:100%;height:100%;object-fit:cover}
+.section{margin:12px 0 7px}.section h2{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.2;margin:0 0 7px;padding-bottom:4px;border-bottom:1.5px solid #9b9b9b;font-weight:800}.section-body{font-size:13.5px;line-height:1.42}.subheading{font-family:Georgia,"Times New Roman",serif;font-size:15.5px;font-weight:800;margin:8px 0 3px}.detail-row{display:grid;grid-template-columns:125px 18px minmax(0,1fr);gap:0;margin:2px 0;line-height:1.34}.detail-row .label{font-weight:600;white-space:nowrap}.detail-row .colon{text-align:center;font-weight:600}.detail-row>div:last-child{min-width:0;overflow-wrap:anywhere}.bullet{margin:2px 0 2px 26px;line-height:1.36;position:relative}.bullet:before{content:"•";position:absolute;left:-15px}.paragraph{margin:4px 0;line-height:1.42}.plain-line{margin:2px 0}.job-title{font-weight:800;font-size:15px;margin:7px 0 2px}.signature-line{margin-top:12px}.signature-img{width:110px;max-height:55px;object-fit:contain;object-position:left center;display:block;margin-top:3px}
+@media print{body{background:#fff;padding:0}#appControls,.admin-panel,.docs-area{display:none!important}#cvRoot{width:210mm;margin:0}.page{margin:0;width:210mm;height:297mm;padding:16mm 20mm;box-shadow:none}.footer-note{display:none}}
+@media(max-width:900px){body{padding:10px 0}.admin-grid{grid-template-columns:1fr}.editor-top{grid-template-columns:1fr}.page{transform-origin:top center;margin-bottom:12px}.cv-header .title{font-size:24px}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <div class="container">
+<div id="appControls">
+  <button class="btn" onclick="toggleAdmin()">🔐 Admin Panel</button>
+  <button class="btn blue" id="pdfBtn" onclick="downloadA4PDF()">⬇ Download A4 PDF</button>
+  <button class="btn light" onclick="openDocuments()">📄 Documents</button>
+</div>
 
-    <!-- PAGE 1 -->
-    <section class="page">
-      <!-- Header -->
-      <div class="header">
-        <div class="left">
-          <h1 class="title">Resume of<br><span style="font-weight:900">MD. Fazle Rabbi</span></h1>
-          <p class="subline">Mailing Address: <strong>Bason, Gazipur, Dhaka</strong></p>
-
-          <div class="contact-list">
-            <div class="contact-item"><strong>Contact :</strong> <span>01610842781</span></div>
-            <div class="contact-item"><strong>E-mail :</strong> <span>fazlerabbi66122@gmail.com</span></div>
-            <div class="contact-item"><strong>LinkedIn :</strong> <span>www.linkedin.com/in/fazle124</span></div>
-          </div>
-        </div>
-
-        <div class="photo"><img src="Profile.png" alt=""></div>
-      </div>
-
-      <!-- Career Objective -->
-      <div class="section">
-        <h2>CAREER OBJECTIVE</h2>
-        <p>
-          Dedicated and detail-oriented quality professional with experience in QC, QI, and quality reporting in the garment industry.
-          Committed to ensuring high production standards, reducing defects, and improving workflow efficiency.
-        </p>
-      </div>
-
-      <!-- JOB EXPERIENCE -->
-      <div class="section">
-        <h2>JOB EXPERIENCE</h2>
-
-        <div class="job">
-          <div class="comp">Colossus Apparel Limited</div>
-          <div class="meta"><strong>Designation :</strong> Quality Reporter</div>
-          <div class="meta"><strong>Experience :</strong> 3 Years</div>
-
-          <div style="margin-top:8px;font-weight:700;color:var(--text)">Key Responsibilities:</div>
-          <ul>
-            <li>Prepare daily quality reports for production lines</li>
-            <li>Monitor defects, trends & root causes</li>
-            <li>Maintain compliance with buyer quality standards</li>
-            <li>Ensure defect-free output through QC & QI team coordination</li>
-            <li>Communicate with supervisors for corrective actions</li>
-          </ul>
-        </div>
-
-        <div class="job" style="margin-top:14px">
-          <div class="comp">Pacific Quality Control Centre Limited (PQC)</div>
-          <div class="meta"><strong>Designation :</strong> Quality Controller (QC)</div>
-          <div class="meta"><strong>Experience :</strong> 1 Years</div>
-
-          <div style="margin-top:8px;font-weight:700;color:var(--text)">Key Responsibilities:</div>
-          <ul>
-            <li>Conduct quality inspections according to SOP</li>
-            <li>Identify defects and suggest corrective actions</li>
-            <li>Monitor quality consistency</li>
-            <li>Prepare analysis reports</li>
-            <li>Team-based quality improvement coordination</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="footer-note">Page 1 of 2</div>
-    </section>
-
-    <!-- PAGE 2 -->
-    <section class="page">
-
-      <!-- EDUCATIONAL QUALIFICATION -->
-      <div class="section">
-        <h2>EDUCATIONAL QUALIFICATION</h2>
-
-        <div class="edu-card">
-          <strong>Secondary School Certificate (SSC)</strong>
-          <div class="edu-line">Institute : Sananda Bari School</div>
-          <div class="edu-line">Group : Science</div>
-          <div class="edu-line">Result : 3.56</div>
-          <div class="edu-line">Board : Dhaka</div>
-        </div>
-
-        <div class="edu-card">
-          <strong>Higher Secondary Certificate (HSC)</strong>
-          <div class="edu-line">Institute : Sananda Bari College</div>
-          <div class="edu-line">Group : Science</div>
-          <div class="edu-line">Result : 3.67</div>
-          <div class="edu-line">Passing Year : 2020</div>
-          <div class="edu-line">Board : Dhaka</div>
-        </div>
-
-        <div class="edu-card">
-          <strong>Bachelor of Science (BSc)</strong>
-          <div class="edu-line">Institute : Gov. Abdul Khalek Memorial College</div>
-          <div class="edu-line">Group : Science</div>
-          <div class="edu-line">Result : Pending</div>
-        </div>
-      </div>
-
-      <!-- COMPUTER SKILLS -->
-      <div class="section">
-        <h2>COMPUTER SKILLS</h2>
-        <ul class="skill-list">
-          <li>Sunrise Software (Hanger Line System)</li>
-          <li>Microsoft Excel, Word & PowerPoint</li>
-          <li>ERP System Knowledge</li>
-          <li>Basic Data Analysis & Reporting</li>
-        </ul>
-      </div>
-
-      <!-- LANGUAGES -->
-      <div class="section">
-        <h2>LANGUAGES</h2>
-        <p>Bangla <br> English <br> Chinese (Basic)</p>
-      </div>
-
-      <!-- PERSONAL INFORMATION -->
-      <div class="section">
-        <h2>PERSONAL INFORMATION</h2>
-
-        <div class="info-table">
-          <div class="info-row"><div class="label">Name :</div> <div>Md Fazle Rabbi</div></div>
-          <div class="info-row"><div class="label">Father’s Name :</div> <div>Md. Badsha Mondol</div></div>
-          <div class="info-row"><div class="label">Mother’s Name :</div> <div>Mst. Nazma Begum</div></div>
-          <div class="info-row"><div class="label">Date of Birth :</div> <div>23 October 2002</div></div>
-          <div class="info-row"><div class="label">Gender :</div> <div>Male</div></div>
-          <div class="info-row"><div class="label">Marital Status :</div> <div>Unmarried</div></div>
-          <div class="info-row"><div class="label">Religion :</div> <div>Islam (Sunni)</div></div>
-          <div class="info-row"><div class="label">Permanent Address :</div> <div>Village: Uttor Mokichar, PO: Sanandabari, UP: Dewanganj, Jamalpur</div></div>
-        </div>
-      </div>
-
-      <!-- DECLARATION -->
-      <div class="section">
-        <h2>DECLARATION</h2>
-        <p>
-          I hereby declare that the information provided is true and correct to the best of my knowledge and belief.
-        </p>
-
-        <p><strong>Date:</strong> <span id="autoDate">--</span></p>
-
-        <img src="signature.jpg" class="signature">
-        <div style="font-weight:700;margin-top:6px">Signature</div>
-      </div>
-
-      <div class="footer-note">Page 2 of 2</div>
-    </section>
-
+<div id="adminPanel" class="admin-panel">
+  <h2>Admin Panel</h2>
+  <div id="loginBox">
+    <p class="note">Phone number and password are not pre-filled. Enter them only to access editing.</p>
+    <div class="admin-grid"><input id="adminPhone" type="text" autocomplete="off" placeholder="Phone number"><input id="adminPass" type="password" autocomplete="off" placeholder="Password"></div>
+    <div class="admin-actions"><button class="btn green" onclick="loginAdmin()">Login</button></div>
+    <div id="loginMsg" class="note"></div>
   </div>
+  <div id="adminTools" style="display:none">
+    <p><strong>Logged in as Admin</strong> — changes are automatically saved to this browser.</p>
+    <h3>Header / Contact / Photo</h3>
+    <div class="admin-grid">
+      <input id="editName" placeholder="Name"><input id="editAddress" placeholder="Mailing Address">
+      <input id="editPhone" placeholder="Contact"><input id="editEmail" placeholder="E-mail">
+      <input id="editLinkedIn" placeholder="LinkedIn"><input id="editPhoto" placeholder="Profile picture: Profile.png">
+      <input id="editSignature" placeholder="Signature picture: signature.jpg">
+    </div>
+    <div class="admin-actions"><button class="btn green" onclick="saveHeader()">💾 Save Header</button></div>
+    <hr class="divider">
+    <h3>All CV Sections — Edit / Add / Delete / Move</h3>
+    <p class="note">Every heading and every line is editable. Example: Key Responsibilities can be changed and its lines can be moved up/down. Changes are saved automatically; Save All is also available.</p>
+    <div id="sectionEditors"></div>
+    <div class="admin-actions">
+      <button class="btn blue" onclick="addSection()">➕ Add Section</button>
+      <button class="btn green" onclick="saveSections()">💾 Save All</button>
+      <button class="btn red" onclick="resetCV()">♻ Reset</button>
+      <button class="btn" onclick="logoutAdmin()">Logout</button>
+    </div>
+    <hr class="divider">
+    <h3>Documents</h3>
+    <div class="admin-grid"><input id="docName" placeholder="Document Name"><input id="docFile" type="file" accept="image/*"></div>
+    <div class="admin-actions"><button class="btn green" onclick="addDocument()">➕ Add Document</button></div>
+    <div id="adminDocList"></div>
+  </div>
+</div>
+<div id="documentsArea" class="docs-area"><strong>Protected Documents</strong><p class="note">Documents can be viewed after Admin verification.</p><div id="docList"></div></div>
+<div id="cvRoot"></div>
 
-  <script>
-    document.getElementById("autoDate").textContent =
-      new Date().toLocaleDateString("en-GB");
-  </script>
+<script>
+const ADMIN_PHONE='01720094069';
+const ADMIN_PASSWORD='Rabbi+AA';
+let adminLoggedIn=false;
 
+const DEFAULT_HEADER={
+ name:'Md. Fazle Rabbi',address:'Bason, Gazipur, Dhaka',phone:'01720094069',email:'fazlerabbi66122@gmail.com',linkedin:'',photo:'Profile.png',signature:'signature.jpg'
+};
+const DEFAULT_SECTIONS=[
+ {id:'career',title:'CAREER OBJECTIVE',body:'To build a professional career in the garments and apparel industry by applying my\nexperience in quality inspection, reporting, and documentation. I aim to contribute to\nmaintaining high quality standards while improving my skills and supporting organizational\ngrowth.'},
+ {id:'job',title:'JOB EXPERIENCE',body:'Colossus Apparel Limited\nDesignation: Quality Reporter\nExperience: 3 Years\n\nKey Responsibilities:\n• Prepare daily, weekly, and monthly quality inspection reports\n• Maintain quality records and documentation\n• Coordinate with Quality Inspectors and Production Team\n• Ensure compliance with quality standards and buyer requirements\n• Data analysis and reporting using Excel\n\nPacific Quality Control Center Ltd\nDesignation: Quality Inspector\nExperience: 1 Year\n\nKey Responsibilities:\n• Inspect garments at different production stages\n• Identify defects and ensure corrective actions\n• Follow buyer quality standards and AQL system\n• Prepare inspection reports and feedback'},
+ {id:'education',title:'EDUCATIONAL QUALIFICATION',body:'Bachelor of Science (BSc)\nInstitute : Govt. Abdul Khalek Memorial College - Dewanganj\nGroup : BSc\nPassing Year : 2023\nResult : 2.64\n\nHigher Secondary Certificate (HSC)\nInstitute : Sanandabari College\nGroup : Science\nPassing Year : 2020\nResult : 3.67\n\nSecondary School Certificate (SSC)\nInstitute : Sanandabari High School\nGroup : Science\nPassing Year : 2018\nResult : 3.56'},
+ {id:'computer',title:'COMPUTER SKILLS',body:'• Microsoft Excel (Advanced level – reporting, data analysis)\n• Microsoft Word (official documentation, reporting)\n• Microsoft PowerPoint\n• Data entry and record management\n• Office documentation and email communication'},
+ {id:'languages',title:'LANGUAGES',body:'Bangla\nEnglish'},
+ {id:'personal',title:'PERSONAL INFORMATION',body:'• Name : Md. Fazle Rabbi\n• Father’s Name : Md. Badsha Mondal\n• Mother’s Name : Mst. Nazma Begum\n• Date of Birth : 23 Oct 2002\n• Gender : Male\n• Marital Status : Unmarried\n• National ID Number : 2425819188\n• Religion : Islam\n• Permanent Address : Uttar Mokirchar, Sanandabari, Dewanganj, Jamalpur'},
+ {id:'declaration',title:'DECLARATION',body:'I hereby declare that the above information is true and correct to the best of my knowledge and belief.\n\nSignature:\nDate:'}
+];
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function getHeader(){try{return {...DEFAULT_HEADER,...JSON.parse(localStorage.getItem('cvHeader')||'{}')}}catch(e){return clone(DEFAULT_HEADER)}}
+function getSections(){try{const x=JSON.parse(localStorage.getItem('cvSections')||'null');return Array.isArray(x)?x:clone(DEFAULT_SECTIONS)}catch(e){return clone(DEFAULT_SECTIONS)}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function isDetail(line){return /^•?\s*.+?\s*:\s+.+$/.test(line)}
+function bodyItems(text){
+ const lines=String(text||'').split(/\r?\n/),items=[];
+ for(let i=0;i<lines.length;i++){
+  const raw=lines[i],line=raw.trim();
+  if(!line){items.push({type:'space',html:'<div style="height:4px"></div>'});continue}
+  if(/^Signature\s*:??\s*$/i.test(line))items.push({type:'signature',html:'<div class="signature-line"><div class="detail-row"><div class="label">Signature</div><div class="colon">:</div><div class="signature-slot"></div></div></div>'});
+  else if(/^Date\s*:?.*$/i.test(line))items.push({type:'date',html:'<div class="detail-row"><div class="label">Date</div><div class="colon">:</div><div class="auto-date"></div></div>'});
+  else if(/^[•*-]\s+/.test(line))items.push({type:'bullet',html:'<div class="bullet">'+esc(line.replace(/^[•*-]\s+/,''))+'</div>'});
+  else if(isDetail(line)){
+   const clean=line.replace(/^•\s*/,''),m=clean.match(/^(.+?)\s*:\s+(.+)$/);
+   items.push({type:'detail',html:'<div class="detail-row"><div class="label">'+esc(m[1])+'</div><div class="colon">:</div><div>'+esc(m[2])+'</div></div>'});
+  } else {
+   const next=(lines[i+1]||'').trim();
+   if(/^Institute\s*:/i.test(next)||/^Group\s*:/i.test(next)||/^Passing Year\s*:/i.test(next)||/^Result\s*:/i.test(next)) items.push({type:'subheading',html:'<div class="subheading">'+esc(line)+'</div>'});
+   else if(/^Key Responsibilities\s*:?/i.test(line)) items.push({type:'jobtitle',html:'<div class="job-title">'+esc(line)+'</div>'});
+   else if(/^Designation\s*:|^Experience\s*:/i.test(line)) items.push({type:'detail',html:'<div class="detail-row"><div class="label">'+esc(line.split(':')[0])+'</div><div class="colon">:</div><div>'+esc(line.substring(line.indexOf(':')+1).trim())+'</div></div>'});
+   else items.push({type:'paragraph',html:'<div class="paragraph">'+esc(line)+'</div>'});
+  }
+ }
+ return items;
+}
+function createPage(root){
+ const page=document.createElement('section');page.className='page';
+ const inner=document.createElement('div');inner.className='page-inner';page.appendChild(inner);root.appendChild(page);return {page,inner};
+}
+function fits(inner,node){inner.appendChild(node);const ok=inner.scrollHeight<=inner.clientHeight+1;if(!ok)inner.removeChild(node);return ok}
+function renderCV(){
+ const h=getHeader(),sections=getSections(),root=document.getElementById('cvRoot');root.innerHTML='';
+ let current=createPage(root), pageNo=1;
+ const header=document.createElement('div');header.className='cv-header';header.innerHTML='<div><h1 class="title">Resume of<br><span>'+esc(h.name)+'</span></h1><p class="subline">Mailing Address:<br>'+esc(h.address)+'</p><div class="contact-list"><div class="contact-item"><strong>☎ Contact:</strong> <span>'+esc(h.phone)+'</span></div><div class="contact-item"><strong>✉ E-mail:</strong> <span>'+esc(h.email)+'</span></div>'+(h.linkedin?'<div class="contact-item"><strong>LinkedIn:</strong> <span>'+esc(h.linkedin)+'</span></div>':'')+'</div></div><div class="photo"><img src="'+esc(h.photo||'Profile.png')+'" onerror="this.style.display=\'none\'" alt="Profile"></div>';
+ fits(current.inner,header);
+ sections.forEach(sec=>{
+   if(!String(sec.title||'').trim()&&!String(sec.body||'').trim())return;
+   const sectionHead=document.createElement('div');sectionHead.className='section';sectionHead.innerHTML='<h2>'+esc(sec.title)+'</h2>';
+   if(!fits(current.inner,sectionHead)){ current=createPage(root); pageNo++; fits(current.inner,sectionHead); }
+   const items=bodyItems(sec.body);
+   items.forEach(item=>{
+     const node=document.createElement('div');node.innerHTML=item.html;const child=node.firstElementChild;
+     if(item.type==='signature'){
+       const slot=child.querySelector('.signature-slot');
+       if(slot){const img=document.createElement('img');img.className='signature-img';img.src=h.signature||'signature.jpg';img.alt='Signature';img.onerror=function(){this.style.display='none'};slot.appendChild(img)}
+     }
+     if(item.type==='date'){
+       const d=child.querySelector('.auto-date'); if(d)d.textContent=new Date().toLocaleDateString('en-GB');
+     }
+     if(!fits(current.inner,child)){
+       current=createPage(root); pageNo++;
+       if(item.type==='signature'){
+         const slot=child.querySelector('.signature-slot');
+         if(slot && !slot.querySelector('img')){const img=document.createElement('img');img.className='signature-img';img.src=h.signature||'signature.jpg';img.alt='Signature';img.onerror=function(){this.style.display='none'};slot.appendChild(img)}
+       }
+       if(item.type==='date'){const d=child.querySelector('.auto-date');if(d)d.textContent=new Date().toLocaleDateString('en-GB')}
+       if(!fits(current.inner,child)){child.style.fontSize='12.5px';fits(current.inner,child)}
+     }
+   });
+ });
+ const pages=[...root.querySelectorAll('.page')];pages.forEach((p,i)=>{const f=document.createElement('div');f.className='footer-note';f.textContent='Page '+(i+1);p.appendChild(f)});
+ document.getElementById('pdfBtn').textContent='⬇ Download A4 PDF ('+pages.length+' pages)';
+}
+function toggleAdmin(){document.getElementById('adminPanel').classList.toggle('open')}
+function loginAdmin(){const p=document.getElementById('adminPhone').value.trim(),pw=document.getElementById('adminPass').value;if(p===ADMIN_PHONE&&pw===ADMIN_PASSWORD){adminLoggedIn=true;document.getElementById('loginBox').style.display='none';document.getElementById('adminTools').style.display='block';loadAdmin();document.getElementById('loginMsg').textContent=''}else document.getElementById('loginMsg').textContent='Invalid phone or password.'}
+function logoutAdmin(){adminLoggedIn=false;document.getElementById('loginBox').style.display='block';document.getElementById('adminTools').style.display='none';document.getElementById('adminPhone').value='';document.getElementById('adminPass').value=''}
+function loadAdmin(){const h=getHeader();document.getElementById('editName').value=h.name;document.getElementById('editAddress').value=h.address;document.getElementById('editPhone').value=h.phone;document.getElementById('editEmail').value=h.email;document.getElementById('editLinkedIn').value=h.linkedin;document.getElementById('editPhoto').value=h.photo;document.getElementById('editSignature').value=h.signature;renderSectionEditors();renderDocs(true)}
+function saveHeader(){if(!adminLoggedIn)return;const h={name:editName.value,address:editAddress.value,phone:editPhone.value,email:editEmail.value,linkedin:editLinkedIn.value,photo:editPhoto.value||'Profile.png',signature:editSignature.value||'signature.jpg'};localStorage.setItem('cvHeader',JSON.stringify(h));renderCV()}
+function editorArray(){return [...document.querySelectorAll('.section-editor')].map((el,i)=>({id:getSections()[i]?.id||('s'+Date.now()+i),title:el.querySelector('.stitle').value,body:el.querySelector('.sbody').value}))}
+function autosaveEditor(i){if(!adminLoggedIn)return;const arr=editorArray();localStorage.setItem('cvSections',JSON.stringify(arr));renderCV()}
+function renderSectionEditors(){
+ const wrap=document.getElementById('sectionEditors');wrap.innerHTML='';const sections=getSections();
+ sections.forEach((s,i)=>{
+  const div=document.createElement('div');div.className='section-editor';div.dataset.index=i;
+  div.innerHTML='<div class="editor-top"><input class="stitle" value="'+esc(s.title)+'" placeholder="Section heading"><div class="move"><button class="btn small" onclick="moveSection('+i+',-1)">⬆</button><button class="btn small" onclick="moveSection('+i+',1)">⬇</button></div></div><textarea class="sbody" placeholder="Write any text here">'+esc(s.body)+'</textarea><div class="section-actions"><button class="btn green small" onclick="saveOneSection('+i+')">💾 Save</button><button class="btn small" onclick="toggleLineManager('+i+')">↕ Arrange Lines</button><button class="btn red small" onclick="deleteSection('+i+')">🗑 Delete</button></div><div id="lines_'+i+'" class="line-manager"></div>';
+  wrap.appendChild(div);
+  const title=div.querySelector('.stitle'),body=div.querySelector('.sbody');
+  title.addEventListener('input',()=>autosaveEditor(i));body.addEventListener('input',()=>autosaveEditor(i));
+ });
+}
+function saveSections(){if(!adminLoggedIn)return;localStorage.setItem('cvSections',JSON.stringify(editorArray()));renderCV();renderSectionEditors()}
+function saveOneSection(i){if(!adminLoggedIn)return;localStorage.setItem('cvSections',JSON.stringify(editorArray()));renderCV();renderSectionEditors()}
+function addSection(){if(!adminLoggedIn)return;const arr=editorArray();arr.push({id:'s'+Date.now(),title:'NEW SECTION',body:'Write your content here.'});localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderSectionEditors()}
+function deleteSection(i){if(!adminLoggedIn)return;if(!confirm('Delete this section?'))return;const arr=editorArray();arr.splice(i,1);localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderSectionEditors()}
+function moveSection(i,dir){if(!adminLoggedIn)return;const arr=editorArray(),j=i+dir;if(j<0||j>=arr.length)return;[arr[i],arr[j]]=[arr[j],arr[i]];localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderSectionEditors()}
+function toggleLineManager(i){const box=document.getElementById('lines_'+i);if(box.classList.contains('open')){box.classList.remove('open');return}box.classList.add('open');renderLineManager(i)}
+function renderLineManager(i){const box=document.getElementById('lines_'+i),s=getSections()[i],lines=String(s.body||'').split(/\r?\n/);box.innerHTML='';lines.forEach((line,j)=>{const row=document.createElement('div');row.className='line-row';row.innerHTML='<textarea data-line="'+j+'">'+esc(line)+'</textarea><div class="line-buttons"><button class="btn small" onclick="moveLine('+i+','+j+',-1)">⬆</button><button class="btn small" onclick="moveLine('+i+','+j+',1)">⬇</button><button class="btn red small" onclick="deleteLine('+i+','+j+')">×</button></div>';box.appendChild(row);row.querySelector('textarea').addEventListener('input',()=>saveLinesFromManager(i))})}
+function saveLinesFromManager(i){if(!adminLoggedIn)return;const box=document.getElementById('lines_'+i);const lines=[...box.querySelectorAll('textarea')].map(x=>x.value);const arr=getSections();arr[i].body=lines.join('\n');localStorage.setItem('cvSections',JSON.stringify(arr));const ed=document.querySelectorAll('.section-editor')[i];if(ed)ed.querySelector('.sbody').value=arr[i].body;renderCV()}
+function moveLine(i,j,dir){const box=document.getElementById('lines_'+i);const lines=[...box.querySelectorAll('textarea')].map(x=>x.value),k=j+dir;if(k<0||k>=lines.length)return;[lines[j],lines[k]]=[lines[k],lines[j]];const arr=getSections();arr[i].body=lines.join('\n');localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderLineManager(i);box.classList.add('open')}
+function deleteLine(i,j){const box=document.getElementById('lines_'+i);const lines=[...box.querySelectorAll('textarea')].map(x=>x.value);lines.splice(j,1);const arr=getSections();arr[i].body=lines.join('\n');localStorage.setItem('cvSections',JSON.stringify(arr));renderCV();renderLineManager(i);box.classList.add('open')}
+function resetCV(){if(!adminLoggedIn||!confirm('Reset CV content to the PDF-based default?'))return;localStorage.removeItem('cvHeader');localStorage.removeItem('cvSections');renderCV();loadAdmin()}
+function openDocuments(){if(!adminLoggedIn){const p=prompt('Enter Admin password to view documents:');if(p!==ADMIN_PASSWORD){alert('Access denied.');return}}document.getElementById('documentsArea').classList.toggle('open');renderDocs(false)}
+function addDocument(){if(!adminLoggedIn)return;const name=document.getElementById('docName').value.trim(),file=document.getElementById('docFile').files[0];if(!name||!file){alert('Enter name and choose an image.');return}const r=new FileReader();r.onload=()=>{const docs=JSON.parse(localStorage.getItem('cvDocs')||'[]');docs.push({id:Date.now(),name,image:r.result});localStorage.setItem('cvDocs',JSON.stringify(docs));document.getElementById('docName').value='';document.getElementById('docFile').value='';renderDocs(true)};r.readAsDataURL(file)}
+function renderDocs(admin){const docs=JSON.parse(localStorage.getItem('cvDocs')||'[]'),list=document.getElementById(admin?'adminDocList':'docList');list.innerHTML=docs.length?'':'<p class="note">No documents added.</p>';docs.forEach(d=>{list.innerHTML+='<div class="doc-card"><img src="'+d.image+'"><small>'+esc(d.name)+'</small>'+(admin?'<button class="btn red small" onclick="deleteDoc('+d.id+')">Delete</button>':'')+'</div>'})}
+function deleteDoc(id){if(!adminLoggedIn)return;const docs=JSON.parse(localStorage.getItem('cvDocs')||'[]').filter(d=>d.id!==id);localStorage.setItem('cvDocs',JSON.stringify(docs));renderDocs(true)}
+async function downloadA4PDF(){
+ renderCV();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+ const pages=[...document.querySelectorAll('.page')];if(!pages.length)return;
+ const wrapper=document.createElement('div');wrapper.style.cssText='width:210mm;background:#fff;margin:0';
+ pages.forEach((p,i)=>{const c=p.cloneNode(true);c.style.cssText='width:210mm;height:297mm;min-height:297mm;max-height:297mm;margin:0;padding:16mm 20mm;box-sizing:border-box;overflow:hidden;background:#fff;box-shadow:none;page-break-after:'+(i<pages.length-1?'always':'auto')+';break-after:'+(i<pages.length-1?'page':'auto')+';';wrapper.appendChild(c)});
+ document.body.appendChild(wrapper);
+ const opt={margin:0,filename:'Resume_of_Md_Fazle_Rabbi_A4.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#fff',logging:false},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}};
+ try{await html2pdf().set(opt).from(wrapper).save()}catch(e){console.error(e);window.print()}finally{wrapper.remove()}
+}
+renderCV();
+</script>
 </body>
 </html>
