@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CV</string>
+    <string name="action_admin">Admin Panel</string>
+    <string name="action_download_pdf">Download A4 PDF</string>
+    <string name="action_documents">Documents</string>
+    <string name="login_title">Admin Panel</string>
+    <string name="login_desc">Enter registered phone number and password to log in.</string>
+    <string name="phone_label">Phone number</string>
+    <string name="password_label">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_logout">Logout</string>
+    <string name="btn_save_header">Save Header</string>
+    <string name="btn_add_section">Add Section</string>
+    <string name="btn_save_all">Save All</string>
+    <string name="btn_reset">Reset CV</string>
+    <string name="dialog_delete_section">Delete this section?</string>
+</resources>

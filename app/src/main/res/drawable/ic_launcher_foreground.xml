@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.65"
+        android:scaleY="0.65"
+        android:translateX="18.9"
+        android:translateY="18.9">
+        <!-- Resume sheet paper -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M28,14 h36 l16,16 v64 c0,4.4 -3.6,8 -8,8 H28 c-4.4,0 -8,-3.6 -8,-8 V22 c0,-4.4 3.6,-8 8,-8 z" />
+        <!-- Folded corner -->
+        <path
+            android:fillColor="#D0E2FF"
+            android:pathData="M64,14 v16 h16 z" />
+        <!-- Person icon avatar badge on top left -->
+        <path
+            android:fillColor="#0B69FF"
+            android:pathData="M38,36 a6,6 0 1,0 0.001,-0.001" />
+        <path
+            android:fillColor="#0B69FF"
+            android:pathData="M30,52 c0,-4 3.6,-7 8,-7 s8,3 8,7 z" />
+        <!-- Resume header line -->
+        <path
+            android:fillColor="#1F2937"
+            android:pathData="M50,33 h22 v4 H50 z" />
+        <path
+            android:fillColor="#6B7280"
+            android:pathData="M50,42 h16 v3 H50 z" />
+        <!-- Resume content lines -->
+        <path
+            android:fillColor="#0B69FF"
+            android:pathData="M28,60 h52 v3 H28 z" />
+        <path
+            android:fillColor="#9CA3AF"
+            android:pathData="M28,68 h44 v3 H28 z" />
+        <path
+            android:fillColor="#9CA3AF"
+            android:pathData="M28,76 h48 v3 H28 z" />
+        <path
+            android:fillColor="#9CA3AF"
+            android:pathData="M28,84 h32 v3 H28 z" />
+    </group>
+</vector>
