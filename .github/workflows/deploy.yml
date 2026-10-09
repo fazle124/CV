@@ -1,0 +1,17 @@
+name: Deploy to Firebase Hosting
+on:
+push:
+branches:
+- main
+jobs:
+build_and_deploy:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Deploy to Firebase Hosting
+uses: FirebaseExtended/action-hosting-deploy@v0
+with:
+repoToken: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FAZLE_RABBI_C7F59 }}
+firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FAZLE_RABBI_C7F59 }}
+channelId: live
+projectId: fazle-rabbi-c7f59
