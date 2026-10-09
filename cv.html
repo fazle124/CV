@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CV - Md. Fazle Rabbi (3 Page A4)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* --- RESET & BASE --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e6e9ef;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* --- CONTROLS (non-print) --- */
+    #appControls {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto 16px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .admin-toggle, .download-btn, .document-btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+      background: #1e293b;
+      color: white;
+      transition: 0.2s;
+    }
+    .download-btn { background: #0b69ff; }
+    .document-btn { background: #eef4ff; color: #0b69ff; }
+    .admin-toggle:hover, .download-btn:hover { opacity: 0.85; }
+
+    /* --- ADMIN PANEL (non-print) --- */
+    .admin-panel {
+      display: none;
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      margin-bottom: 18px;
+    }
+    .admin-panel.open { display: block; }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .admin-panel input, .admin-panel textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d0d7e2;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .admin-panel textarea { min-height: 70px; resize: vertical; }
+    .admin-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .danger { background: #b91c1c; }
+    .success { background: #166534; }
+
+    /* --- DOCUMENTS AREA (non-print) --- */
+    .docs-area {
+      display: none;
+      background: #f8fafc;
+      border: 1px solid #d0d7e2;
+      border-radius: 12px;
+      padding: 16px;
+      max-width: 900px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+    .docs-area.open { display: block; }
+    .doc-card {
+      display: inline-block;
+      width: 160px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px;
+      margin: 6px;
+      vertical-align: top;
+    }
+    .doc-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; }
+    .doc-card small { display: block; font-weight: 700; margin-top: 4px; }
+
+    /* --- PAGE CONTAINER (exactly 3 A4 pages) --- */
+    .container {
+      width: 210mm;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    /* --- EACH PAGE --- */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      padding: 12mm 14mm;
+      box-sizing: border-box;
+      overflow: hidden;          /* important: keep content inside A4 */
+      position: relative;
+      background: white;
+      page-break-after: always;
+      break-after: page;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    /* --- TYPOGRAPHY (compact to fit 3 pages) --- */
+    .page p, .page li, .page .meta, .page .colon-table, .page .edu-details {
+      font-size: 13.5px;
+      line-height: 1.3;
+      color: #1e1e1e;
+    }
+    .page .section {
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    .page .section h2 {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      padding-bottom: 2px;
+      border-bottom: 1px solid #d0d7e2;
+      letter-spacing: 0.2px;
+    }
+    .page .job {
+      margin-top: 6px;
+    }
+    .page .job .comp {
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .page .job .meta {
+      font-size: 13px;
+      color: #2d2d2d;
+    }
+    .page .job ul {
+      margin: 3px 0 4px 18px;
+      padding-left: 4px;
+    }
+    .page .job li {
+      margin-bottom: 1px;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      border-bottom: 2px solid #d0d7e2;
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+    }
+    .title {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 0 0 2px 0;
+      line-height: 1.2;
+    }
+    .subline {
+      font-size: 13px;
+      color: #3b3b3b;
+      margin: 2px 0 6px 0;
+    }
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 13px;
+    }
+    .contact-item strong {
+      display: inline-block;
+      min-width: 80px;
+      font-weight: 700;
+    }
+    .photo {
+      width: 100px;
+      height: 130px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background: #f0f2f5;
+      flex-shrink: 0;
+    }
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* EDUCATION (clean grid) */
+    .edu-card {
+      margin: 0 0 6px 0;
+      padding: 0 0 4px 0;
+      border-bottom: 1px solid #e2e6ec;
+    }
+    .edu-card:last-child { border-bottom: none; }
+    .edu-subheading {
+      display: block;
+      width: fit-content;
+      margin: 4px auto 3px auto;
+      padding: 0 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-bottom: 2px solid #111;
+      text-align: center;
+    }
+    .edu-details {
+      display: grid;
+      grid-template-columns: 130px 14px 1fr;
+      gap: 2px 0;
+      align-items: start;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+    .edu-details .label { font-weight: 700; }
+    .edu-details .colon { text-align: center; font-weight: 700; }
+
+    /* SKILLS, LANGUAGES, PERSONAL */
+    .skill-list {
+      margin: 4px 0 0 18px;
+      padding-left: 0;
+    }
+    .skill-list li { margin-bottom: 1px; }
+
+    .colon-table {
+      display: grid;
+      grid-template-columns: 140px 14px 1fr;
+      gap: 2px 0;
+      align-items: start;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+    .colon-table .label { font-weight: 700; }
+    .colon-table .colon { text-align: center; font-weight: 700; }
+
+    /* FOOTER PAGE NUMBER */
+    .footer-note {
+      position: absolute;
+      bottom: 4mm;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      color: #5a5a5a;
+      font-weight: 500;
+    }
+
+    /* SIGNATURE */
+    .signature {
+      width: 140px;
+      margin-top: 6px;
+    }
+
+    /* --- PRINT (hide controls, force A4) --- */
+    @media print {
+      body { background: white; padding: 0; }
+      #appControls, .admin-panel, .docs-area { display: none !important; }
+      .container { box-shadow: none; width: 210mm; margin: 0; }
+      .page {
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        padding: 12mm 14mm;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden;
+      }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+      .page p, .page li, .page .meta, .page .colon-table, .page .edu-details {
+        font-size: 12.5px;
+        line-height: 1.25;
+      }
+      .title { font-size: 24px; }
+      .section h2 { font-size: 16px; }
+    }
+
+    /* small screen fallback */
+    @media screen and (max-width: 700px) {
+      .container { width: 100%; }
+      .page { width: 100%; height: auto; min-height: auto; max-height: none; padding: 6mm; overflow: visible; }
+      .admin-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- PDF libraries (html2pdf) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+  <!-- CONTROLS -->
+  <div id="appControls">
+    <button class="admin-toggle" onclick="toggleAdmin()">🔐 Admin Panel</button>
+    <button class="download-btn" onclick="downloadA4PDF()">⬇ Download A4 PDF (3 pages)</button>
+    <button class="document-btn" onclick="openDocuments()">📄 Documents</button>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="admin-panel">
+    <h2 style="margin-top:0">Admin Panel</h2>
+    <div id="loginBox">
+      <p class="lock-note">Admin access required to edit, delete, add documents.</p>
+      <div class="admin-grid">
+        <input id="adminPhone" placeholder="Phone number" type="text" autocomplete="off">
+        <input id="adminPass" type="password" placeholder="Password" autocomplete="off">
+      </div>
+      <div class="admin-actions">
+        <button class="admin-toggle success" onclick="loginAdmin()">Login</button>
+      </div>
+      <div id="loginMsg" style="color:#b91c1c;margin-top:8px"></div>
+    </div>
+    <div id="adminTools" style="display:none">
+      <p><strong>Logged in as Admin</strong></p>
+      <div class="admin-grid">
+        <input id="editName" placeholder="Name">
+        <input id="editPhone" placeholder="Contact">
+        <input id="editEmail" placeholder="E-mail">
+        <input id="editLinkedIn" placeholder="LinkedIn">
+        <textarea id="editObjective" placeholder="Career Objective"></textarea>
+        <textarea id="editEducation" placeholder="Educational Qualification"></textarea>
+        <textarea id="editComputer" placeholder="Computer Skills"></textarea>
+        <textarea id="editLanguages" placeholder="Languages"></textarea>
+        <textarea id="editPersonal" placeholder="Personal Information"></textarea>
+        <textarea id="editHobby" placeholder="Hobby"></textarea>
+        <textarea id="editDeclaration" placeholder="Declaration"></textarea>
+      </div>
+      <div class="admin-actions">
+        <button class="admin-toggle success" onclick="saveAllInfo()">💾 Save Info</button>
+        <button class="admin-toggle danger" onclick="deleteAllSavedInfo()">🗑 Delete Saved</button>
+        <button class="admin-toggle" onclick="logoutAdmin()">Logout</button>
+      </div>
+      <hr>
+      <h3>Job Experience Dates</h3>
+      <div class="admin-grid">
+        <input id="adminJob1Start" type="date"><input id="adminJob1End" type="date">
+        <input id="adminJob2Start" type="date"><input id="adminJob2End" type="date">
+      </div>
+      <button class="admin-toggle success" onclick="saveJobDates()">💾 Save Job Dates</button>
+      <hr><h3>Reference</h3>
+      <input id="referenceName" placeholder="Reference Name">
+      <button class="admin-toggle success" onclick="saveReference()">💾 Save Reference</button>
+      <button class="admin-toggle danger" onclick="deleteReference()">🗑 Delete</button>
+      <hr><h3>Documents</h3>
+      <input id="docName" placeholder="Document Name (NID, Certificate etc.)">
+      <input id="docFile" type="file" accept="image/*">
+      <div class="admin-actions">
+        <button class="admin-toggle success" onclick="addDocument()">➕ Add Document</button>
+      </div>
+      <div id="adminDocList"></div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTS AREA -->
+  <div id="documentsArea" class="docs-area">
+    <strong>Protected Documents</strong>
+    <p class="lock-note">Documents can be viewed after Admin password is verified.</p>
+    <div id="docList"></div>
+  </div>
+
+  <!-- ========== 3 A4 PAGES ========== -->
+  <div class="container">
+
+    <!-- PAGE 1 -->
+    <section class="page">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="left">
+          <h1 class="title">Resume of<br><span style="font-weight:900">MD. Fazle Rabbi</span></h1>
+          <p class="subline">Mailing Address: <strong>Bason, Gazipur, Dhaka</strong></p>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Contact :</strong> <span>01610842781</span></div>
+            <div class="contact-item"><strong>E-mail :</strong> <span>fazlerabbi66122@gmail.com</span></div>
+            <div class="contact-item"><strong>LinkedIn :</strong> <span>www.linkedin.com/in/fazle124</span></div>
+          </div>
+        </div>
+        <div class="photo"><img src="Profile.png" alt="Profile"></div>
+      </div>
+
+      <!-- CAREER OBJECTIVE -->
+      <div class="section">
+        <h2>CAREER OBJECTIVE</h2>
+        <p id="objectiveContent" style="font-size:13.5px; line-height:1.3;">
+          To build a progressive career in the garment and quality assurance industry where I can utilize my
+          professional experience in Quality Reporting, Quality Control (QC), Quality Inspection (QI), third-party
+          inspection, defect identification, quality analysis, and production monitoring. I am a dedicated,
+          responsible, and detail-oriented professional with practical experience in warehouse, finishing, and
+          sewing operations, as well as quality reporting and coordination with production teams. I am committed
+          to maintaining buyer quality requirements, identifying quality risks at an early stage, supporting
+          corrective and preventive actions, and continuously improving product quality and workplace efficiency.
+          I am eager to work in a professional organization that values quality, discipline, teamwork, learning,
+          and continuous improvement, while allowing me to develop my technical and professional skills and make a
+          positive contribution to organizational success.
+        </p>
+      </div>
+
+      <!-- JOB EXPERIENCE -->
+      <div class="section">
+        <h2>JOB EXPERIENCE</h2>
+
+        <div class="job">
+          <div class="comp">Colossus Apparel Limited, LAWS GROUP</div>
+          <div class="meta"><strong>Designation :</strong> Quality Reporter</div>
+          <div class="meta"><strong>Experience :</strong> <span class="jobExperienceDisplay">—</span></div>
+          <div style="margin-top:4px;font-weight:700;">Key Responsibilities:</div>
+          <ul>
+            <li>Prepare and maintain daily quality reports for production lines and quality performance monitoring.</li>
+            <li>Monitor defects, quality trends, recurring problems, and root causes to support quality improvement.</li>
+            <li>Coordinate with QC/QI teams to maintain buyer quality requirements and production quality standards.</li>
+            <li>Follow up on corrective and preventive actions and communicate quality findings to responsible teams.</li>
+            <li>Support production teams in reducing defects and improving overall workflow efficiency.</li>
+          </ul>
+        </div>
+
+        <div class="job" style="margin-top:10px;">
+          <div class="comp">Pacific Quality Control Centre Limited (PQC)</div>
+          <div class="meta"><strong>Designation :</strong> QC (Quality Controller)</div>
+          <div class="meta"><strong>Experience :</strong> <span class="jobExperienceDisplay">—</span></div>
+          <div style="margin-top:4px;font-weight:700;">Key Responsibilities:</div>
+          <ul>
+            <li>Worked as a third-party inspector for warehouse, finishing, and sewing sections.</li>
+            <li>Conducted quality inspections according to required inspection procedures and standards.</li>
+            <li>Identified garment defects and communicated inspection findings to concerned teams.</li>
+            <li>Monitored quality consistency across warehouse, finishing, and sewing operations.</li>
+            <li>Prepared inspection and quality analysis reports and supported corrective actions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-note">Page 1</div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page">
+      <!-- EDUCATION -->
+      <div class="section education-section">
+        <h2>EDUCATIONAL QUALIFICATION</h2>
+
+        <div class="edu-card">
+          <div class="edu-subheading">Bachelor of Science (BSc) — Degree Pass</div>
+          <div class="edu-details">
+            <div class="label">Institute</div><div class="colon">:</div><div>Gov. Abdul Khalek Memorial College</div>
+            <div class="label">Group</div><div class="colon">:</div><div>BSc</div>
+            <div class="label">Result</div><div class="colon">:</div><div>CGPA 2.64 (out of 4)</div>
+            <div class="label">Passing Year</div><div class="colon">:</div><div>2023</div>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-subheading">Higher Secondary Certificate (HSC)</div>
+          <div class="edu-details">
+            <div class="label">Institute</div><div class="colon">:</div><div>Sananda Bari College</div>
+            <div class="label">Group</div><div class="colon">:</div><div>Science</div>
+            <div class="label">Result</div><div class="colon">:</div><div>3.67</div>
+            <div class="label">Board</div><div class="colon">:</div><div>Mymensingh</div>
+            <div class="label">Passing Year</div><div class="colon">:</div><div>2020</div>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-subheading">Secondary School Certificate (SSC)</div>
+          <div class="edu-details">
+            <div class="label">Institute</div><div class="colon">:</div><div>Sananda Bari School</div>
+            <div class="label">Group</div><div class="colon">:</div><div>Science</div>
+            <div class="label">Result</div><div class="colon">:</div><div>3.56</div>
+            <div class="label">Board</div><div class="colon">:</div><div>Dhaka</div>
+            <div class="label">Passing Year</div><div class="colon">:</div><div>2018</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPUTER SKILLS -->
+      <div class="section">
+        <h2>COMPUTER SKILLS</h2>
+        <ul class="skill-list">
+          <li>Microsoft Excel — Advanced Level</li>
+          <li>Microsoft Word</li>
+          <li>Microsoft PowerPoint</li>
+          <li>WordPress</li>
+          <li>Data Analysis</li>
+        </ul>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="section">
+        <h2>LANGUAGES</h2>
+        <p>Bangla (Native) <br> English <br> Chinese (Basic)</p>
+      </div>
+
+      <!-- PERSONAL INFORMATION (starts here to fit page 2) -->
+      <div class="section">
+        <h2>PERSONAL INFORMATION</h2>
+        <div class="colon-table">
+          <div class="label">Name</div><div class="colon">:</div><div>Md Fazle Rabbi</div>
+          <div class="label">Father’s Name</div><div class="colon">:</div><div>Md. Badsha Mondol</div>
+          <div class="label">Mother’s Name</div><div class="colon">:</div><div>Mst. Nazma Begum</div>
+          <div class="label">Date of Birth</div><div class="colon">:</div><div>23 October 2002</div>
+          <div class="label">Gender</div><div class="colon">:</div><div>Male</div>
+          <div class="label">Marital Status</div><div class="colon">:</div><div>Unmarried</div>
+          <div class="label">Religion</div><div class="colon">:</div><div>Islam (Sunni)</div>
+          <div class="label">NID</div><div class="colon">:</div><div>2425819188</div>
+          <div class="label">Permanent Address</div><div class="colon">:</div><div>Village: Uttor Mokichar, PO: Sanandabari, UP: Dewanganj, Jamalpur</div>
+        </div>
+      </div>
+
+      <div class="footer-note">Page 2</div>
+    </section>
+
+    <!-- PAGE 3 -->
+    <section class="page">
+      <!-- HOBBY -->
+      <div class="section">
+        <h2>HOBBY</h2>
+        <p>Reading books, learning languages, and playing sports.</p>
+      </div>
+
+      <!-- REFERENCES -->
+      <div class="section">
+        <h2>REFERENCES</h2>
+        <div id="referenceList"><p class="lock-note">Reference will be entered from Admin Panel.</p></div>
+      </div>
+
+      <!-- DECLARATION -->
+      <div class="section">
+        <h2>DECLARATION</h2>
+        <p style="font-size:13px; line-height:1.25;">
+          I hereby solemnly declare that all the information and statements provided in this Curriculum Vitae
+          are true, complete, and correct to the best of my knowledge and belief. I understand that any
+          misrepresentation or incorrect information may affect my eligibility for employment. I am willing
+          to provide the necessary supporting documents whenever required and accept responsibility for the
+          accuracy of the information stated above.
+        </p>
+        <p style="margin-top:4px;"><strong>Date:</strong> <span id="autoDate">--</span></p>
+        <img src="signature.jpg" class="signature" alt="signature">
+        <div style="font-weight:700;margin-top:2px;">Signature</div>
+      </div>
+
+      <div class="footer-note">Page 3</div>
+    </section>
+
+  </div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // ---- AUTO DATE ----
+    document.getElementById("autoDate").textContent = new Date().toLocaleDateString("en-GB");
+
+    // ---- ADMIN LOGIC (Phone & Password hidden by default, but stored in JS) ----
+    const ADMIN_PHONE = "01720094069";
+    const ADMIN_PASSWORD = "Rabbi+AA";
+    let adminLoggedIn = false;
+
+    function toggleAdmin() {
+      document.getElementById('adminPanel').classList.toggle('open');
+    }
+
+    function loginAdmin() {
+      const p = document.getElementById('adminPhone').value.trim();
+      const pw = document.getElementById('adminPass').value;
+      if (p === ADMIN_PHONE && pw === ADMIN_PASSWORD) {
+        adminLoggedIn = true;
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('adminTools').style.display = 'block';
+        loadInfoToForm();
+        renderDocs(true);
+        document.getElementById('loginMsg').textContent = '';
+      } else {
+        document.getElementById('loginMsg').textContent = 'Invalid phone or password.';
+      }
+    }
+
+    function logoutAdmin() {
+      adminLoggedIn = false;
+      document.getElementById('loginBox').style.display = 'block';
+      document.getElementById('adminTools').style.display = 'none';
+      document.getElementById('adminPhone').value = '';
+      document.getElementById('adminPass').value = '';
+    }
+
+    function esc(s) {
+      return String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
+    }
+
+    function setText(selector, value) {
+      const el = document.querySelector(selector);
+      if (el) el.innerHTML = value || '';
+    }
+
+    function loadInfoToForm() {
+      const d = JSON.parse(localStorage.getItem('cvInfo') || '{}');
+      document.getElementById('editName').value = d.name || 'MD. Fazle Rabbi';
+      document.getElementById('editPhone').value = d.phone || '01610842781';
+      document.getElementById('editEmail').value = d.email || 'fazlerabbi66122@gmail.com';
+      document.getElementById('editLinkedIn').value = d.linkedin || 'www.linkedin.com/in/fazle124';
+      document.getElementById('editObjective').value = d.objective || '';
+      document.getElementById('editEducation').value = d.education || '';
+      document.getElementById('editComputer').value = d.computer || '';
+      document.getElementById('editLanguages').value = d.languages || '';
+      document.getElementById('editPersonal').value = d.personal || '';
+      document.getElementById('editHobby').value = d.hobby || '';
+      document.getElementById('editDeclaration').value = d.declaration || '';
+    }
+
+    function saveAllInfo() {
+      if (!adminLoggedIn) return;
+      const d = {
+        name: document.getElementById('editName').value,
+        phone: document.getElementById('editPhone').value,
+        email: document.getElementById('editEmail').value,
+        linkedin: document.getElementById('editLinkedIn').value,
+        objective: document.getElementById('editObjective').value,
+        education: document.getElementById('editEducation').value,
+        computer: document.getElementById('editComputer').value,
+        languages: document.getElementById('editLanguages').value,
+        personal: document.getElementById('editPersonal').value,
+        hobby: document.getElementById('editHobby').value,
+        declaration: document.getElementById('editDeclaration').value
+      };
+      localStorage.setItem('cvInfo', JSON.stringify(d));
+      applyInfo(d);
+      alert('Information saved.');
+    }
+
+    function applyInfo(d) {
+      const title = document.querySelector('.title');
+      if (title) title.innerHTML = 'Resume of<br><span style="font-weight:900">' + esc(d.name) + '</span>';
+      const contacts = document.querySelectorAll('.contact-item span');
+      if (contacts[0]) contacts[0].textContent = d.phone;
+      if (contacts[1]) contacts[1].textContent = d.email;
+      if (contacts[2]) contacts[2].textContent = d.linkedin;
+      if (d.objective) setText('#objectiveContent', esc(d.objective));
+    }
+
+    function deleteAllSavedInfo() {
+      if (!adminLoggedIn) return;
+      if (confirm('Delete all saved info and documents?')) {
+        localStorage.removeItem('cvInfo');
+        localStorage.removeItem('cvDocs');
+        alert('Deleted.');
+        location.reload();
+      }
+    }
+
+    // ---- DOCUMENTS ----
+    function addDocument() {
+      if (!adminLoggedIn) return;
+      const name = document.getElementById('docName').value.trim();
+      const file = document.getElementById('docFile').files[0];
+      if (!name || !file) { alert('Enter name and choose image.'); return; }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const docs = JSON.parse(localStorage.getItem('cvDocs') || '[]');
+        docs.push({ id: Date.now(), name, image: reader.result });
+        localStorage.setItem('cvDocs', JSON.stringify(docs));
+        document.getElementById('docName').value = '';
+        document.getElementById('docFile').value = '';
+        renderDocs(true);
+        alert('Document added.');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function deleteDoc(id) {
+      if (!adminLoggedIn) return;
+      const docs = JSON.parse(localStorage.getItem('cvDocs') || '[]').filter(d => d.id !== id);
+      localStorage.setItem('cvDocs', JSON.stringify(docs));
+      renderDocs(true);
+    }
+
+    function renderDocs(admin = false) {
+      const docs = JSON.parse(localStorage.getItem('cvDocs') || '[]');
+      const list = document.getElementById(admin ? 'adminDocList' : 'docList');
+      if (!list) return;
+      list.innerHTML = docs.length ? '' : '<p class="lock-note">No documents added.</p>';
+      docs.forEach(d => {
+        list.innerHTML += `<div class="doc-card">
+          <img src="${d.image}" alt="${esc(d.name)}">
+          <small>${esc(d.name)}</small>
+          ${admin ? `<button class="admin-toggle danger" style="font-size:12px;padding:4px 8px;margin-top:4px;" onclick="deleteDoc(${d.id})">Delete</button>` : ''}
+        </div>`;
+      });
+    }
+
+    function openDocuments() {
+      if (!adminLoggedIn) {
+        const p = prompt('Enter Admin password to view documents:');
+        if (p !== ADMIN_PASSWORD) { alert('Access denied.'); return; }
+      }
+      document.getElementById('documentsArea').classList.toggle('open');
+      renderDocs(false);
+    }
+
+    // ---- JOB DATES ----
+    function ex(s, e) {
+      if (!s) return '—';
+      let a = new Date(s + 'T00:00:00');
+      let b = e ? new Date(e + 'T00:00:00') : new Date();
+      if (isNaN(a) || isNaN(b) || b < a) return '—';
+      let y = b.getFullYear() - a.getFullYear();
+      let m = b.getMonth() - a.getMonth();
+      if (b.getDate() < a.getDate()) m--;
+      if (m < 0) { y--; m += 12; }
+      return (y ? y + ' Year' + (y > 1 ? 's ' : ' ') : '') + (m ? m + ' Month' + (m > 1 ? 's' : '') : '') || '0 Months';
+    }
+
+    function loadJD() {
+      const d = JSON.parse(localStorage.getItem('cvJobDates') || '{"a":"2023-08-01","b":"","c":"2022-08-01","e":"2023-07-31"}');
+      const ids = ['adminJob1Start', 'adminJob1End', 'adminJob2Start', 'adminJob2End'];
+      const keys = ['a', 'b', 'c', 'e'];
+      ids.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el) el.value = d[keys[i]] || '';
+      });
+      const displays = document.querySelectorAll('.jobExperienceDisplay');
+      if (displays[0]) displays[0].textContent = ex(d.a, d.b);
+      if (displays[1]) displays[1].textContent = ex(d.c, d.e);
+    }
+
+    function saveJobDates() {
+      if (!adminLoggedIn) return;
+      const d = {
+        a: document.getElementById('adminJob1Start').value,
+        b: document.getElementById('adminJob1End').value,
+        c: document.getElementById('adminJob2Start').value,
+        e: document.getElementById('adminJob2End').value
+      };
+      localStorage.setItem('cvJobDates', JSON.stringify(d));
+      loadJD();
+      alert('Job dates saved.');
+    }
+
+    // ---- REFERENCE ----
+    function saveReference() {
+      if (!adminLoggedIn) return;
+      const name = document.getElementById('referenceName').value.trim();
+      localStorage.setItem('cvReference', name);
+      renderReference();
+    }
+
+    function deleteReference() {
+      if (!adminLoggedIn) return;
+      localStorage.removeItem('cvReference');
+      renderReference();
+    }
+
+    function renderReference() {
+      const name = localStorage.getItem('cvReference') || '';
+      const list = document.getElementById('referenceList');
+      if (list) {
+        list.innerHTML = name ? '<p><strong>' + esc(name) + '</strong></p>' : '<p class="lock-note">Reference will be entered from Admin Panel.</p>';
+      }
+      const input = document.getElementById('referenceName');
+      if (input) input.value = name;
+    }
+
+    // ---- INIT ----
+    (function init() {
+      const info = localStorage.getItem('cvInfo');
+      if (info) applyInfo(JSON.parse(info));
+      loadJD();
+      renderReference();
+      renderDocs(false);
+    })();
+
+    // ---- DOWNLOAD A4 PDF (3 pages, exact) ----
+    async function downloadA4PDF() {
+      const pages = document.querySelectorAll('.page');
+      if (pages.length !== 3) {
+        alert('CV must contain exactly 3 pages.');
+        return;
+      }
+      // Use html2pdf with precise A4
+      const opt = {
+        margin: 0,
+        filename: 'Md_Fazle_Rabbi_CV_A4_3Pages.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
+      };
+
+      // Build a clean wrapper with only the pages
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = 'background:#fff;width:210mm;margin:0;';
+      pages.forEach(p => {
+        const clone = p.cloneNode(true);
+        clone.style.cssText = 'width:210mm;height:297mm;min-height:297mm;max-height:297mm;padding:12mm 14mm;box-sizing:border-box;overflow:hidden;background:#fff;page-break-after:always;break-after:page;';
+        wrapper.appendChild(clone);
+      });
+      document.body.appendChild(wrapper);
+
+      try {
+        await html2pdf().set(opt).from(wrapper).save();
+      } catch (e) {
+        console.warn('html2pdf error, fallback to print:', e);
+        window.print();
+      } finally {
+        wrapper.remove();
+      }
+    }
+  </script>
+
+</body>
+</html>
