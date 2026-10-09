@@ -1,6 +1,0 @@
-{
-  "name": "CV",
-  "description": "Professional Resume and CV application for Md. Fazle Rabbi with customizable sections, admin dashboard, documents, and PDF export",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
