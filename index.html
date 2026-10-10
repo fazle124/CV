@@ -628,6 +628,53 @@
       document.getElementById('editDeclaration').value = d.declaration || '';
     }
 
+
+async function saveAllInfo() {
+  if (!adminLoggedIn) return;
+
+  try {
+    await setDoc(doc(db, "cvData", "main"), {
+      name: document.getElementById('editName').value,
+      phone: document.getElementById('editPhone').value,
+      email: document.getElementById('editEmail').value,
+      personal: document.getElementById('editPersonal').value,
+      objective: document.getElementById('editObjective').value,
+      education: document.getElementById('editEducation').value,
+      experience: document.getElementById('editExperience').value,
+      skills: document.getElementById('editSkills').value,
+      language: document.getElementById('editLanguage').value,
+      reference: document.getElementById('editReference').value,
+      declaration: document.getElementById('editDeclaration').value
+    });
+
+    localStorage.setItem('cvInfo', JSON.stringify({
+      name: document.getElementById('editName').value,
+      phone: document.getElementById('editPhone').value,
+      email: document.getElementById('editEmail').value,
+      personal: document.getElementById('editPersonal').value,
+      objective: document.getElementById('editObjective').value,
+      education: document.getElementById('editEducation').value,
+      experience: document.getElementById('editExperience').value,
+      skills: document.getElementById('editSkills').value,
+      language: document.getElementById('editLanguage').value,
+      reference: document.getElementById('editReference').value,
+      declaration: document.getElementById('editDeclaration').value
+    }));
+
+    alert('Information saved.');
+    renderReference();
+  } catch (error) {
+    console.error("Error saving document: ", error);
+  }
+    }
+      
+
+
+
+
+
+
+    
     function saveAllInfo() {
       if (!adminLoggedIn) return;
       const d = {
