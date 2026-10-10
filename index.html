@@ -674,26 +674,6 @@ async function saveAllInfo() {
 
 
 
-    
-    function saveAllInfo() {
-      if (!adminLoggedIn) return;
-      const d = {
-        name: document.getElementById('editName').value,
-        phone: document.getElementById('editPhone').value,
-        email: document.getElementById('editEmail').value,
-        linkedin: document.getElementById('editLinkedIn').value,
-        objective: document.getElementById('editObjective').value,
-        education: document.getElementById('editEducation').value,
-        computer: document.getElementById('editComputer').value,
-        languages: document.getElementById('editLanguages').value,
-        personal: document.getElementById('editPersonal').value,
-        hobby: document.getElementById('editHobby').value,
-        declaration: document.getElementById('editDeclaration').value
-      };
-      localStorage.setItem('cvInfo', JSON.stringify(d));
-      applyInfo(d);
-      alert('Information saved.');
-    }
 
     function applyInfo(d) {
       const title = document.querySelector('.title');
